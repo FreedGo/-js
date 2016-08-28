@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>数字</title>
+		<script type="text/javascript">
+//			3.1 数字
+//				和其他编程语言不同，JavaScript不区分整数值和浮点数值，JavaScript中的所有数字都用浮点数值表示
+//				采用的是IEEE754标准顶一顶 64位浮点格式表示数字，最大数，最小数，整数范围。。。略
+//				一个数字直接出现在JavaScript程序中,我们称其为数字直接量(numeric literal)
+
+//				3.1.1 整型直接量，JavaScript中，用一个数字来表示一个十进制整数
+					0;
+					3
+					3000000;
+				
+//					Javascript同样支持十六进制的的值,指以"0x"或者"0X"为前缀,后面跟十六进制数串的直接量
+					console.log(0xff);//15*16+15 = 255 十进制
+					console.log(0xcafe911);
+					
+//					JavaScript标准不支持八进制直接量,在某些时候可以允许八进制表示整数
+	
+//				3.1.2 浮点型直接量，可以直接含有小数的传统写法，或者使用指数计数法表示
+					3.14;
+					2546.15;
+					.45454545;
+					6.02e23;//6.02*10^23
+					1.4738E-32;//1.473*10^-32
+				
+//				3.1.3  JavaScript中的算数运算符
+//				       包括基本的算数运算符,+,-,*,/,%
+//				       还支持更加复杂的算数运算,通过作为Math对象的属性定义的函数和常量来实现:/
+				
+					Math.pow(2,53);console.log(Math.pow(2,53));//2的53次幂
+					Math.round(.6);console.log(Math.round(.6));//四舍五入
+					Math.ceil(.6);console.log(Math.ceil(.6));//向上求整
+					Math.floor(.6);console.log(Math.floor(.6));//向下求整
+					Math.abs(-5);console.log(Math.abs(-5));//求绝对值
+					Math.max(5,6,7);console.log(Math.max(5,6,7));//返回最大值
+					Math.min(4,5,6);//返回最小值
+					Math.random();console.log(Math.random());//生成0-1之间的伪随机数
+					console.log(Math.PI);//π
+					console.log((Math.E));//自然对数的底数
+					Math.sqrt(3);//3的平方根
+					Math.pow(8,1/3);console.log(Math.pow(81,1/4));//平方根函数
+					console.log(Math.sin(30));//正弦值，参数为弧度
+					console.log(Math.log(10));//自然数10的对数
+					Math.log(100)/Math.LN10;  // Base 10 logarithm of 100 
+					Math.log(512)/Math.LN2;   // Base 2 logarithm of 512 
+					Math.exp(3);              // Math.E cubed
+					
+//					JavaScript中的算术运算符在溢出(overflow),下溢(underflow)或被0整除时不会报错
+//					当运算结果超出所能表示的数字上限时,结果会是一个特殊的无穷大值(Infinity),同样负数为负无穷大(-infinity)/
+		
+//					下溢是当运算结果无限接近于零,并比JavaScript所能表示的最小值还小的时候发生的一种情况,此时,JavaScript会返回0,同样在负数情况下会返回特殊的值,负零
+					
+//					被0整除在JavaScript中并不报错,它只是简单的返回无穷大,或负无穷大,但有一个例外,0除以0,是没有意义的,此时返回NaN;
+		
+					console.log(Infinity);//将一个可读写的值初始化为infinit
+					console.log(Number.POSITIVE_INFINITY);//同样的值，只读
+					console.log(1/0);//同样，infinity
+					console.log(Number.MAX_VALUE+1);//
+		
+//					JavaScript的非数字值哟一点特殊,它和任何值都不想等,包括他自身,也就是说没有办法通过x==NaN,来判断变量x的值是否为NaN,
+//					应当使用x!=x,当且仅当X为NaN,的时候,返回结果为true
+					var x = NaN;
+					console.log(x != x);//true
+//					或者使用函数isNaN();
+//					console.log(isNaN(x));//true,NaN或者非数字值会返回true
+					console.log(isFinite(1));//参数不是NaN,Infinity,或-Infinity的时候返回true
+					
+//					负零和正零几乎完全相等,除了作为除数之外
+					var zero = 0;
+					var negz = -0;
+					console.log(zero === negz);//true
+					console.log(1/zero === 1/negz);//false
+					
+//					3.1.4 二进制浮点数和四舍五入错误 
+//						实数有无数个,但是JavaScript通过浮点数的形式智能表示其中的有限的个数,也就是说JavaScript中使用实数的时候,通常是真实值的一个近似的表示.
+//						JavaScript可以精确的表示二进制的分数如1/2,1/8,1/1024等;
+//						但是不能精确的表示十进制的分数如1/10,1/100等
+						
+						var x = 0.3 - 0.2;
+						var y = 0.2 - 0.1;
+						console.log(x == 0.1);//false
+						console.log(y == 0.1);//true
+						console.log(x==y);//false
+						
+//						在任何使用二进制浮点数的编程语言中都会出现这个问题,这种计算结果可以胜任绝大部分的计算任务,通常只会在比较是否相等的时候出现错误
+	
+//					3.1.5 日期和时间
+					var then = new Date(2011,0,1);console.log(then);//2011年1月1日
+					var later = new Date(2011,0,1,17,10,30);console.log(later);
+					var now = new Date();console.log(now);//当前时间
+					var elapsed = now - then;console.log(elapsed);//计算俩个时间间隔的毫秒数
+					console.log(now.getFullYear());
+					console.log(now.getMonth());
+					console.log(now.getDate());
+					console.log(now.getDay());
+					console.log(now.getHours());
+					console.log(now.getUTCHours());
+				
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

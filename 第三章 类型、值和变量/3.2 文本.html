@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>3.2 文本</title>
+		<script type="text/javascript">
+//			3.2 字符串(string)是一组由16位值组成 不可变的有序序列,每个字符通常来自于Unicode字符集
+
+//				3.2.1 字符串直接量  是由单引号或者双引号括起来的字符序列,单双引号要交替包括
+				"";//空字符串
+				'string';
+				'3.14';
+				'name = "form';
+				
+//				在ECMAScript3中,字符串直接量必须写在一行中,而在ECMAScript5中,可以拆成数行,每行必须以反斜线(\)结束
+//				反斜线和行结束符都不算是字符串直接量的内容,如果希望在字符串直接亮中另起一行,可以使用转义字符\n;
+				"two\nlings";
+				"one\
+				long\
+				line";
+				
+//				3.2.2 转义字符 
+//				在JavaScript字符串中，反斜线\有着特殊的用途，一旦他后面加一个字符，就不再表示它字面的含义了，
+//				例如/n 表示换行
+//				JavaScript转义字符
+//				\o   NUL字符
+//				\b   退格符
+//				\t   水平制表符
+//				\n   换行符
+//				\v   垂直制表符
+//				\f   换页符
+//				\r   回车符
+//				\"   双引号
+//				\'   单引号
+//				\\   反斜线
+
+//				3.2.3 字符串的使用  
+				
+//				字符串用 + 号进行拼接
+				msg = "hello"+"world";
+				
+//				获取字符串的长度(16位值的个数)
+				console.log(msg.length);
+				
+//				其他字符串相关方法
+				var s = "Hello,World";
+				console.log(s.charAt(0));//第一个字符
+				console.log(s.charAt(s.length-1));
+				console.log(s.substring(1,4));//第2到4个字符
+				console.log(s.slice(1,4));//第2到4个字符
+				console.log(s.slice(-3));//最后三个字符
+				console.log(s.indexOf("l"));//l首次出现的下标
+				console.log(s.lastIndexOf("l"));//l最后出现的下标
+				console.log(s.indexOf("l",3));//l在下标3及后面首次出现的位置的下标
+				console.log(s.split(","));//以逗号为基准，分隔字符串为数组
+				console.log(s.replace("l","h"));//替换首个l为h
+				console.log(s.replace(/l/g,"h"));//替换所有l为h,g为全局变量
+				console.log(s.toUpperCase());//全部大写
+				
+//				另外在Javascript中,字符串本身是不变的,而像replace()和toUpperCase()等方法都是返回的新字符串,原字符串本身是不变的
+
+//				3.2.4 模式匹配
+//				JavaScript定义了RegExp()构造函数，用来创建表示匹配文本模式的对象，即正则表达式（regular expression）;
+//				尽管RegExp并不是JavaScript中的基本数据类型，但是他们依然拥有直接量的写法，在两个斜杠之间的文本构成了一个正则表达式的直接
+//				量，第二个斜杠后面可以跟一个或者多个字符，用来修饰匹配模式的含义
+				/^HTML/;//匹配以HTML开头的字符串
+				/[1-9][0-9]*/;//匹配一个非零数字，后面是任意个数字
+				/\bjavascript\b/i;//匹配单词javascript，并忽略大小
+
+//				RegExp定义了很多的有用的方法，字符串同样具有可以接受RegExp参数的方法，如
+				var text = 'test:1,2,3';
+				var pattern = /\d+/g;//全局匹配一个或者多个数字的实例
+				pattern.test(text);console.log(pattern.test(text));//true,匹配成功
+				text.search(pattern);console.log(text.search(pattern));//首次匹配成功的位置
+				text.match(pattern);console.log(text.match(pattern));//匹配全部元素，并生成数组
+				text.replace(pattern,'#');console.log(text.replace(pattern,'#'));//原text不变，生成新字符串test:#,#,#
+				text.split(/\D+/);console.log(text.split(/\D+/));//用非数字字符截取字符串
+
+
+
+
+
+
+
+
+
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

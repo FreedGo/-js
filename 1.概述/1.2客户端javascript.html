@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="button" name="" id="btn" value="点击按钮" />
+	</body>
+</html>
+<script type="text/javascript">
+	//本节是对客户端的javascript做一个快速概览
+	//1.封装事件
+	function moveon(){
+		//通过一个弹框来问用户一个问题
+		var answer = confirm('准备好了吗？')
+		if(answer){
+			window.location = "http://baidu.com";
+		}	
+	}
+	//2.获取节点
+	var btn = document.getElementById('btn');
+	//3.设置触发事件
+		btn.onclick = function(){
+			setTimeout(moveon,600);//通过单次定时器来调用
+		}
+</script>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>js权威指南-1.1-js语言核心</title>
+		<script type="text/javascript">
+			//1-初始化表达式（initializer expression）
+			//1.1-对象，键值对，字符串到值的映射，json
+			var book = {
+				topic:'Javascript',
+				fat:true
+			}
+			//通过.或者[]来访问对象
+			console.log(book.topic);//Javascript
+			console.log(book['fat']);//true
+			book.auther = "freed";//赋值创建新属性
+			book.contents = "";//赋值为空的字符串
+			book.contents1 = {};//赋值为空对象，没有属性
+			console.log(book)
+			
+			//1.2-数组
+			var primes = [2,3,5,7]
+			console.log(primes[0]);//数组第一个元素，索引为0
+			console.log(primes.length);//4,数组中元素个数
+			console.log(primes[primes.length-1]);//7，数组最后一个元素
+			primes[4] = 9;//赋值添加新元素
+			console.log(primes);
+			primes[4] = 11;//赋值来改变元素
+			console.log(primes);
+			var empty = [];//空数组，0个元素
+			console.log(empty.length);//0
+			
+			//1.3对象和数组中都能再包含另一个对象和数组
+			var points = [//具有2个元素的数组，每个元素都是一个对象
+				{x:0,y:0},
+				{x:1,y:1}
+			];
+			var data = {//具有2个元素的对象，每个元素都是一个数组
+				trial1:[1,2,3,4],
+				trial2:[5,6,7,8]
+			}
+			
+			//2-运算符
+			//2.1-一般运算符
+			console.log(3+2);//5
+			console.log(3-2);//1
+			console.log(3*2);//6
+			console.log(3/2);//1.5
+			console.log(points[1].x-points[0].x);//复杂操作运输
+			console.log('3'+'2');//拼接字符串
+			
+			//2.2运算符简写
+			var count = 0;
+			count++;//自增1
+			count--;//自减1
+			count+=2;//自加2
+			count*=3;//自乘3
+			count;//变量名本身也是一个表达式
+			
+			//2.3关系运算符
+			var x = 2,y = 3;
+			console.log(x==y);//false
+			console.log(x!=y);//true
+			console.log(x<y);//true
+			console.log(x<=y);//true
+			console.log(x>y);//false
+			console.log(x>=y);//false
+			console.log("two"=="three");//false
+			console.log("two">"three");//tw在字母表中的索引值大于th
+			console.log(false ==(x>y));//true
+			
+			//2.4逻辑运算符是对布尔值的合并或求反
+			console.log((x==2)&&(y==3));//true
+			console.log((x>3)||(y<3));//false
+			console.log(!(x==y));//true
+			
+			//3函数
+			//3.1函数是一段带有参数的javascript代码段，可以一次定义多次调用
+			function plus1(x){
+				return x+1;
+			}
+			console.log(plus1(y));//4
+			
+			//3.2函数是一种值，可以赋给变量
+			var square = function(x){
+				return x*x;
+			}
+			console.log(square);//此时squeare代表这个函数本身
+			console.log(square(x));
+			console.log(plus1(square(y)));//可以在一个表达式中调用两个函数
+			
+			//4.当函数和对象合写在一起，就变成了方法（method）
+			//4.1当函数赋值给对象的属性，我们称之为方法，所有的javascript对象都含有方法
+			var a = [];
+			a.push(1,2,3);//用push方法向a中添加元素
+			console.log(a);
+			a.reverse();//a中的元素次序反转
+			console.log(a);
+			
+			//4.2我们也可以自己定义方法，“this”关键字是对定义方法的对象的引用，
+			points.dist = function(){
+				var p1 = this[0],p2 = this[1];
+				var a = p2.x-p1.x;
+				var b = p2.y-p1.y;
+				return Math.sqrt(a*a+b*b);//调用数学的平方根方法
+			};
+			console.log(points.dist());//1.414
+			
+			//5.给出一些控制语句的例子
+			//5.1-求绝对值的函数
+			function abs(x){//书上案例
+				if (x>=0) {
+					return x;
+				} else{
+					return -x;
+				}
+			};
+			function abs1(x){//自己写的
+				x>=0? x :x=-x;
+				return x;
+			};
+			console.log(abs(-5));//5
+			console.log(abs1(-5));//5
+			
+			//5.2计算阶乘
+			function factorial(n){
+				var product = 1;
+				while (n>1) {
+					product*=n;
+					n--;
+				};
+				return product;
+			}
+			console.log(factorial(5));
+			function factorial2(n){//第二个阶乘函数
+				var product2 = 1;
+				for (var i=1; i <= n; i++){
+					product2 *=i;
+				}
+				return product2;
+			}
+			console.log(factorial2(5));
+			//6.js是一种面向对象的编程语言,下面定义一个类来表示2D平面几何中的点,来计算改点到原点的距离
+			//6.1，首先构造一个函数来初始化一个point对象
+			function Point(x,y){
+				this.x = x;
+				this.y = y;
+			}
+			//使用new关键字和构造函数来创建一个实例
+			var p = new Point(1,1);//平面几何中点
+			//通过给构造函数prototype对象赋值，来给point对象定义方法
+			Point.prototype.r = function(){
+				return Math.sqrt(
+					this.x*this.x+this.y*this.y
+				)
+			}
+			p.r();
+			console.log(p.r());
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
