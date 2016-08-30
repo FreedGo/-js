@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Title</title>
+    <script type="text/javascript">
+//        3.5 全局对象
+//        JavaScript中的全局对象的属性是全局定义的符号，JavaScript程序可以直接使用。
+//        当JavaScript解释器启动时，或者任何web浏览器加载一个新页面时，他将创建一个新的全局对象，并给他一组定义的初始属性：
+//        全局属性：如undefined，Infinity和NaN；
+//        全局函数：如isNaN()，parseInt()和eval();
+//        构造函数：比如 Date(),RegExp(),String(),Object()和Array();
+//        全局对象：如Math和JSON
+
+//        在代码的最顶级，不在任何函数内的Javascript代码，可以使用JavaScript关键字this来引用全局对象;
+
+//        3.6 包装对象
+//        JavaScript对象是一种复合值，他是属性或者已命名值的集合，通过"."符号来引用属性值。
+//        当属性值是一个函数的时候，称其为方法。
+
+//        又例，
+            var s = "Hello World";
+            var word = s.substring(s.indexOf(" "),s.length);
+            console.log(word);
+//        字符串既然不是对象，怎么会有属性呢？
+
+//        实际上一段我们引用了字符串的属性，JavaScript就会将字符串通过调用 new String()方法，转换成对象，这个对象继承字符串的方法，
+//        并被用来处理字符串的引用。
+
+//        一旦属性引用结束，这个新创建的对象就会销毁！(其实在是线上不一定创建或者销毁这个临时对象，然而整个过程看起来是这样的)。
+
+//        存取字符串，数字，或者布尔值的属性时临时创建的对象称作包装对象，它只是而用来区分字符串值和字符串对象，数字和数值对象以及布尔值和
+//        布尔对象。
+//        通常，包装对象只是被看做是一种细节，而不用特别关注。
+//        由于字符串，数字和布尔值的属性都是只读的，而且不能给他们定义新属性，因此他们是有别于对象的。
+
+//        通过String(),Number()或者Boolean()构造函数来显式的创建包装对象，
+//        例：
+            var s = "test",n = 1, b = true; //一个字符串，数字和布尔值
+            var S = new String(s);//一个字符串对象
+            var N = new Number(n);//一个数字对象
+            var B = new Boolean(b);//一个布尔对象
+            console.log(s == S );console.log(s === S );console.log(typeof S);//true,false,object
+            console.log(n == N );console.log(n === N );console.log(typeof N);//true,false,object
+            console.log(b == B );console.log(b === B );console.log(typeof B);//true,false,object
+//        上例中的对象S，N，B常常--但不总是--表现的和s,n,b一样，通过 == 等于运算符比较认为他们是相同的，但是用“===”
+//        全等运算符，认为他们是不相同的。
+
+//        3.7 不可变的原始值和可变的对象引用
+//        Javascript中的原始值（undefined，null，布尔值，字符串，数字）与对象（包括数组和函数）有着根本的区别。
+//        原始值是不可变的，任何方法都无法改变一个原始值。
+
+//        对象和原始值不同，首先他们是可变的，他们的值是可以修改的
+            var o = { x:1};
+            o.x = 2; //对象值是可以被改变的
+            o.y = 3; //再次改变这个对象，给他增加新的属性
+            console.log(o);
+
+//        对象的比较并值的比较，即使两个对象包含同样的属性及同样的值，他们也是不相等的。
+//        各个索引元素完全相等的两个数组也不相等。
+            var o = {x:1}, p = {x:1};
+            console.log(o == p); //false
+            var a = [],b = [];
+            console.log(a == b);//false
+
+//        我们通常将对象称为引用类型（reference type），以此和JavaScript的基本类型区分开来。
+//        依照术语的叫法，对象的值都是引用（reference）,因此对象的比较其实是引用的比较。
+            var a =[],b = a ;
+            b[0] = 1;
+            console.log(a[0]);//a也会同时改变
+            console.log(a === b);//true
+//        如上例，将对象或数组赋值给一个变量，仅仅是赋值的引用值，对象本身并没有复制一次。
+
+//        如果你想得到一个额对象或者数组的副本，则必须显式的复制对象的每个属性或者数组的每一个元素。
+            var a = ['a','b','c'];
+            var b = [];
+            for(var i = 0;i < a.length;i++ ){
+                b[i] = a[i];
+            }
+
+//        同样，如果我们想比较两个单独的对象或者数组，则必须比较他们的属性或者元素
+            function equalArray(a,b) {
+                if (a.length != b.length) return flase;
+                for(var i = 0;i< a.length; i++){
+                    if (a[i] != b[i]) return false;
+                    return true;
+                }
+            }
+            var equalResult = equalArray(a,b);
+                console.log(equalResult);
+
+
+
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
